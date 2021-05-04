@@ -7,4 +7,4 @@ class Game(models.Model):
     player_min = models.IntegerField()
     player_max = models.IntegerField()
     age_min = models.IntegerField()
-    designer = models.CharField()
+    designer = models.CharField(max_length=50)
