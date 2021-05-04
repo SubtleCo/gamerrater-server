@@ -8,3 +8,4 @@ class Game(models.Model):
     player_max = models.IntegerField()
     age_min = models.IntegerField()
     designer = models.CharField(max_length=50)
+    categories = models.ManyToManyField("Category", related_name="games")
