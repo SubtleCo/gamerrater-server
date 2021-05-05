@@ -14,7 +14,7 @@ import environ
 from pathlib import Path
 
 env = environ.Env()
-environ.Env.read_env('/Users/alexmartin/workspace/python/gamerrater/server/.env')
+environ.Env.read_env('.env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
