@@ -5,7 +5,7 @@
             "previewLimit": 50,
             "driver": "SQLite",
             "name": "gamerrater",
-            "database": "${workspaceFolder:server}/gamerrater/db.sqlite3"
+            "database": "db.sqlite3"
         }
     ]
 }
