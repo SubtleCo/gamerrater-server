@@ -13,12 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from gamerraterapi.views.category import CategoryViewSet
+from gamerraterapi.views.game import GameViewSet
 from django.conf.urls import include
 from django.urls import path
 from gamerraterapi.views import register_user, login_user
 from rest_framework import routers
 
 router = routers.DefaultRouter(trailing_slash=False)
+router.register(r'games', GameViewSet, 'game')
+router.register(r'categories', CategoryViewSet, 'category')
 
 urlpatterns = [
     path('', include(router.urls)),
