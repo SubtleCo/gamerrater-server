@@ -1,4 +1,6 @@
+from django.db.models.deletion import DO_NOTHING
 from gamerraterapi.models.rating import Rating
+from django.contrib.auth.models import User
 from django.db import models
 
 class Game(models.Model):
@@ -10,6 +12,7 @@ class Game(models.Model):
     age_min = models.IntegerField()
     designer = models.CharField(max_length=50)
     categories = models.ManyToManyField("Category", related_name="games")
+    user = models.ForeignKey(User, on_delete=DO_NOTHING, default=1)
 
     @property
     def average_rating(self):
