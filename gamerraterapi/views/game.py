@@ -1,4 +1,4 @@
-### View module for handling requests about games
+# View module for handling requests about games
 from django.core.exceptions import ValidationError
 from rest_framework import status
 from django.http import HttpResponseServerError
@@ -7,6 +7,8 @@ from rest_framework.response import Response
 from rest_framework import serializers, status
 from gamerraterapi.models import Game, Category
 from django.contrib.auth.models import User
+from django.db.models import Q
+
 
 class GameViewSet(ViewSet):
 
@@ -19,7 +21,20 @@ class GameViewSet(ViewSet):
             return HttpResponseServerError(ex)
 
     def list(self, request):
-        games = Game.objects.all()
+
+        search_term = self.request.query_params.get('q', None)
+        order_by = self.request.query_params.get('orderby', None)
+
+        if search_term:
+            games = Game.objects.filter(
+                Q(title__contains=search_term) |
+                Q(description__contains=search_term) |
+                Q(designer__contains=search_term)
+            )
+        elif order_by:
+            games = Game.objects.order_by(order_by)
+        else:
+            games = Game.objects.all()
 
         serializer = GameSerializer(
             games, many=True, context={'request': request}
@@ -68,7 +83,6 @@ class GameViewSet(ViewSet):
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 ################################  SERIALIZERS  ################################
 
 class UserSerializer(serializers.ModelSerializer):
@@ -76,11 +90,12 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'first_name', 'last_name')
 
+
 class GameSerializer(serializers.ModelSerializer):
     user = UserSerializer(many=False)
 
     class Meta:
         model = Game
         fields = ('id', 'title', 'released', 'description', 'player_min', 'player_max',
-            'age_min', 'designer', 'categories', 'average_rating', 'user')
+                  'age_min', 'designer', 'categories', 'average_rating', 'user')
         depth = 1
