@@ -22,9 +22,22 @@ class RatingViewSet(ViewSet):
         try:
             rating.save()
             serializer = RatingSerializer(rating, context={'request': request})
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({'reason': ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+    def update(self, request, pk=None):
+        req = request.data
+        rating = Rating.objects.get(pk=pk)
+        rating.score = req['score']
+
+
+        try:
+            rating.save()
+            serializer = RatingSerializer(rating, context={'request': request})
+            return Response(serializer.data)
+        except ValidationError as ex:
+            return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
 
 ################################  SERIALIZERS  ################################

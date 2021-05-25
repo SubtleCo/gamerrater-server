@@ -23,18 +23,16 @@ class GameViewSet(ViewSet):
     def list(self, request):
 
         search_term = self.request.query_params.get('q', None)
-        order_by = self.request.query_params.get('orderby', None)
+        order_by = self.request.query_params.get('orderby', 'title')
 
         if search_term:
             games = Game.objects.filter(
                 Q(title__contains=search_term) |
                 Q(description__contains=search_term) |
                 Q(designer__contains=search_term)
-            )
-        elif order_by:
-            games = Game.objects.order_by(order_by)
+            ).order_by(order_by)
         else:
-            games = Game.objects.all()
+            games = Game.objects.all().order_by(order_by)
 
         serializer = GameSerializer(
             games, many=True, context={'request': request}
@@ -58,9 +56,20 @@ class GameViewSet(ViewSet):
             categories = Category.objects.in_bulk(req['categories'])
             game.categories.set(categories)
             serializer = GameSerializer(game, context={'request': request})
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk=None):
+
+        try:
+            game = Game.objects.get(pk=pk)
+            game.delete()
+            return Response(None, status.HTTP_204_NO_CONTENT)
+        except Exception as ex:
+            return HttpResponseServerError(ex)
+
+
 
     def update(self, request, pk=None):
         req = request.data
@@ -78,7 +87,7 @@ class GameViewSet(ViewSet):
             categories = Category.objects.in_bulk(req['categories'])
             game.categories.set(categories)
             serializer = GameSerializer(game, context={'request': request})
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_204_NO_CONTENT)
         except ValidationError as ex:
             return Response({"reason": ex.message}, status=status.HTTP_400_BAD_REQUEST)
 
