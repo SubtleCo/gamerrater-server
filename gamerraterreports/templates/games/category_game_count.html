@@ -8,11 +8,11 @@
         <title>GamerRater Reports</title>
     </head>
     <body>
-        <h1>Bottom 5 Games </h1>
+        <h1>Games Per Category </h1>
 
-        {% for game in bottom_5_games_list %}
-            <h2>{{ game.title }}</h2>
-            <h3>{{ game.score }}</h3>
+        {% for category in categories_with_game_count_list %}
+            <h2>{{ category.label }}</h2>
+            <h3>{{ category.count }}</h3>
         {% endfor %} 
     </body>
 </html>

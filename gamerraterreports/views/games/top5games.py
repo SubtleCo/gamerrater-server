@@ -40,7 +40,7 @@ def top_5_games_list(request):
 
                 top_5_games[game.id] = game
 
-        list_of_top_5_games = top_5_games.values()
+        list_of_top_5_games = list(top_5_games.values())
 
         template = 'games/top_5_games.html'
         context = {
