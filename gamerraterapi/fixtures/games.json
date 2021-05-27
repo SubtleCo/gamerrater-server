@@ -40,5 +40,47 @@
             "designer": "Probably a German",
             "categories": [1,3,5]
         }
+    },
+    {
+        "model": "gamerraterapi.game",
+        "pk": 4,
+        "fields": {
+            "title": "Good v Bad",
+            "released": 2014,
+            "description": "A card based gem trading game",
+            "player_min": 2,
+            "player_max": 4,
+            "age_min": 10,
+            "designer": "Probably a German",
+            "categories": [1,3,5]
+        }
+    },
+    {
+        "model": "gamerraterapi.game",
+        "pk": 5,
+        "fields": {
+            "title": "Junkrats",
+            "released": 2014,
+            "description": "A card based gem trading game",
+            "player_min": 2,
+            "player_max": 4,
+            "age_min": 10,
+            "designer": "Probably a German",
+            "categories": [1,3,5]
+        }
+    },
+    {
+        "model": "gamerraterapi.game",
+        "pk": 6,
+        "fields": {
+            "title": "Jenga",
+            "released": 2014,
+            "description": "A card based gem trading game",
+            "player_min": 2,
+            "player_max": 4,
+            "age_min": 10,
+            "designer": "Probably a German",
+            "categories": [1,3,5]
+        }
     }
 ]
