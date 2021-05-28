@@ -1,0 +1,74 @@
+[
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 1,
+        "fields": {
+            "user_id": 1,
+            "game_id": 1,
+            "score": 8
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 2,
+        "fields": {
+            "user_id": 1,
+            "game_id": 2,
+            "score": 6
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 3,
+        "fields": {
+            "user_id": 1,
+            "game_id": 3,
+            "score": 9
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 4,
+        "fields": {
+            "user_id": 1,
+            "game_id": 4,
+            "score": 3
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 5,
+        "fields": {
+            "user_id": 1,
+            "game_id": 5,
+            "score": 10
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 6,
+        "fields": {
+            "user_id": 1,
+            "game_id": 6,
+            "score": 7
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 7,
+        "fields": {
+            "user_id": 1,
+            "game_id": 2,
+            "score": 9
+        }
+    },
+    {
+        "model": "gamerraterapi.rating",
+        "pk": 8,
+        "fields": {
+            "user_id": 1,
+            "game_id": 4,
+            "score": 4
+        }
+    }
+]
